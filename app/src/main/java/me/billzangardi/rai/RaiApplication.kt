@@ -3,7 +3,6 @@ package me.billzangardi.rai
 import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
-import com.orhanobut.hawk.Hawk
 import com.squareup.leakcanary.LeakCanary
 import me.billzangardi.rai.injection.component.ApplicationComponent
 import me.billzangardi.rai.injection.component.DaggerApplicationComponent
@@ -25,7 +24,6 @@ class RaiApplication : MultiDexApplication() {
             Stetho.initializeWithDefaults(this)
             LeakCanary.install(this)
         }
-        Hawk.init(this).build()
     }
 
     // Needed to replace the component with a test specific one

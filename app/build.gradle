@@ -16,17 +16,21 @@ android {
     }
     buildTypes {
         def STRING = "String"
-        def BASE_URL = "BASE_URL"
+        def BITGRAIL_API = "BITGRAIL_API"
+        def COINDESK_API = "COINDESK_API"
         def BITGRAIL_URL = "\"https://bitgrail.com/api/v1/\""
+        def COINDESK_URL = "\"https://api.coindesk.com/v1/bpi/\""
 
         debug {
             debuggable true
             minifyEnabled false
             applicationIdSuffix "." + name
-            buildConfigField STRING, BASE_URL, BITGRAIL_URL
+            buildConfigField STRING, BITGRAIL_API, BITGRAIL_URL
+            buildConfigField STRING, COINDESK_API, COINDESK_URL
         }
         release {
-            buildConfigField STRING, BASE_URL, BITGRAIL_URL
+            buildConfigField STRING, BITGRAIL_API, BITGRAIL_URL
+            buildConfigField STRING, COINDESK_API, COINDESK_URL
             postprocessing {
                 removeUnusedCode false
                 removeUnusedResources false
@@ -74,7 +78,6 @@ dependencies {
     implementation supportLibs
     implementation networkLibs
     implementation rxJavaLibs
-    implementation securityLibs
     implementation 'com.android.support:multidex:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -92,6 +95,11 @@ dependencies {
     debugImplementation leakCannaryDebug
     releaseImplementation leakCannaryNoOp
     testImplementation leakCannaryDebug
+
+    // android-prefs library
+    kapt "org.jraf:prefs-compiler:$versions.prefsVersion"
+    annotationProcessor "org.jraf:prefs-compiler:$versions.prefsVersion"
+    implementation "org.jraf:prefs:$versions.prefsVersion"
 
     // APT dependencies
     kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"

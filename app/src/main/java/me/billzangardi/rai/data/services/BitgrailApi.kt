@@ -1,7 +1,7 @@
 package me.billzangardi.rai.data.services
 
 import io.reactivex.Single
-import me.billzangardi.rai.data.model.TickerResponse
+import me.billzangardi.rai.data.model.XrbResponse
 import retrofit2.http.GET
 
 /**
@@ -10,5 +10,5 @@ import retrofit2.http.GET
 
 interface BitgrailApi {
     @GET("BTC-XRB/ticker")
-    fun getCurrentTicker(): Single<TickerResponse>
+    fun getCurrentTicker(): Single<XrbResponse>
 }

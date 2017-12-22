@@ -11,11 +11,7 @@ ext {
             dagger          : '2.8',
             butterKnife     : '8.8.0',
             materialProgress: '1.7',
-            hawk            : '2.0.1',
-            rootbeer        : '0.0.6',
-            urbanAirship    : '8.5.1',
-            playServices    : '11.0.1',
-            caligraphy      : '2.3.0',
+            prefsVersion    : '1.2.2',
             room            : '1.0.0-alpha5',
             dbDebug         : '1.0.1',
             leakCanary      : '1.5.3'
@@ -30,7 +26,8 @@ ext {
             design           : "com.android.support:design:$versions.support",
             recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
-            gridLayout       : "com.android.support:gridlayout-v7:$versions.support"
+            gridLayout       : "com.android.support:gridlayout-v7:$versions.support",
+            materialProgress : "com.pnikosis:materialish-progress:$versions.materialProgress"
     ]
 
     rxJava = [
@@ -68,10 +65,6 @@ ext {
             testRules      : "com.android.support.test:rules:$versions.espressoRunner",
     ] + mockito
 
-    security = [
-            hawk    : "com.orhanobut:hawk:$versions.hawk",
-    ]
-
     debugTools = [
             dbDebug: "com.amitshekhar.android:debug-db:$versions.dbDebug"
     ]
@@ -81,7 +74,6 @@ ext {
     rxJavaLibs = rxJava.values()
     unitTestLibs = unitTest.values()
     androidTestsLibs = androidTests.values() + supportLibs
-    securityLibs = security.values()
     debugToolsLibs = debugTools.values()
 
     leakCannaryDebug = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"

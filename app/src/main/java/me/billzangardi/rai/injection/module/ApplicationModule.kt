@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import me.billzangardi.rai.data.services.BitgrailApi
 import me.billzangardi.rai.data.services.BitgrailApiFactory
+import me.billzangardi.rai.data.services.CoindeskApi
+import me.billzangardi.rai.data.services.CoindeskApiFactory
 import me.billzangardi.rai.injection.ApplicationContext
 import javax.inject.Singleton
 
@@ -27,5 +29,11 @@ class ApplicationModule(private val mApplication: Application) {
     @Singleton
     internal fun provideBitgrailApi(): BitgrailApi {
         return BitgrailApiFactory.makeStarterService()
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideCoindeskApi(): CoindeskApi {
+        return CoindeskApiFactory.makeStarterService()
     }
 }

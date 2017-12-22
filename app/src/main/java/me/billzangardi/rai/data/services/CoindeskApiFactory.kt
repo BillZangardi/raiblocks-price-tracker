@@ -15,19 +15,19 @@ import timber.log.Timber
  * Created by zangardiw on 12/22/17.
  */
 
-object BitgrailApiFactory {
-    fun makeStarterService(): BitgrailApi {
-        return makeBitgrailNetworkService(makeGson())
+object CoindeskApiFactory {
+    fun makeStarterService(): CoindeskApi {
+        return makeCoindeskNetworkService(makeGson())
     }
 
-    private fun makeBitgrailNetworkService(gson: Gson): BitgrailApi {
+    private fun makeCoindeskNetworkService(gson: Gson): CoindeskApi {
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BITGRAIL_API)
+                .baseUrl(BuildConfig.COINDESK_API)
                 .client(makeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-        return retrofit.create(BitgrailApi::class.java)
+        return retrofit.create(CoindeskApi::class.java)
     }
 
     @Suppress("DEPRECATION")

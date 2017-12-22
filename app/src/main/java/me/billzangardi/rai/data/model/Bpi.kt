@@ -4,16 +4,17 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-
 /**
  * Created by zangardiw on 12/22/17.
  */
-
-class TickerResponse {
-    @SerializedName("success")
+class Bpi {
+    @SerializedName("USD")
     @Expose
-    var success: Int? = null
-    @SerializedName("response")
+    val uSD: Usd? = null
+    @SerializedName("GBP")
     @Expose
-    var response: Response? = null
+    val gBP: Gbp? = null
+    @SerializedName("EUR")
+    @Expose
+    val eUR: Eur? = null
 }
