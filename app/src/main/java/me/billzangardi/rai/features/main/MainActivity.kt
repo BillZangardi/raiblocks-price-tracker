@@ -1,12 +1,18 @@
 package me.billzangardi.rai.features.main
 
+import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
+import android.text.TextUtils
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import android.widget.AdapterView
 import butterknife.BindView
 import butterknife.OnClick
 import me.billzangardi.rai.R
@@ -15,13 +21,12 @@ import me.billzangardi.rai.features.base.BaseActivity
 import me.billzangardi.rai.prefs.MainPrefs
 import me.billzangardi.rai.util.ViewUtil
 import javax.inject.Inject
-import android.content.Intent
-import android.net.Uri
 
 
 class MainActivity : BaseActivity(), MainView {
 
     @Inject lateinit var mMainPresenter: MainPresenter
+    private var mDrawerToggle: ActionBarDrawerToggle? = null
 
     @BindView(R.id.edit_xrb_amount)
     lateinit var mXrbAmount: EditText
@@ -43,6 +48,12 @@ class MainActivity : BaseActivity(), MainView {
     lateinit var mXrbToEur: TextView
     @BindView(R.id.conversion_rate_xrb_gbp)
     lateinit var mXrbToGbp: TextView
+    @BindView(R.id.navList)
+    lateinit var mDrawerList: ListView
+    @BindView(R.id.drawer_layout)
+    lateinit var mDrawerLayout: DrawerLayout
+
+    private var mAdapter: ArrayAdapter<String>? = null
 
     override val layout: Int
         get() = R.layout.activity_main
@@ -50,6 +61,11 @@ class MainActivity : BaseActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityComponent().inject(this)
+        addDrawerItems()
+        setupDrawer()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setHomeButtonEnabled(true);
         mMainPresenter.attachView(this)
         mMainPresenter.fetchData()
         mXrbAmount.setText(MainPrefs.get(this).amountOwned.toString())
@@ -66,6 +82,80 @@ class MainActivity : BaseActivity(), MainView {
             false
         }
         updateData()
+    }
+
+    private fun addDrawerItems() {
+        val osArray = arrayOf("Website", "Reddit", "Discord", "Twitter", "Donations")
+        mAdapter = ArrayAdapter(this, R.layout.nav_menu_item, osArray)
+        mDrawerList.adapter = mAdapter
+        mDrawerList.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            var url: String = ""
+            when (position) {
+                0 -> url = "https://raiblocks.net/"
+                1 -> url = "https://www.reddit.com/r/RaiBlocks"
+                2 -> url = "https://discordapp.com/invite/JphbBas"
+                3 -> url = "https://twitter.com/raiblocks"
+            }
+            if (!TextUtils.isEmpty(url)) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            } else {
+                showDonationDialog()
+            }
+        }
+    }
+
+    private fun showDonationDialog() {
+        val alert = AlertDialog.Builder(this)
+        val imageview = ImageView(this)
+        imageview.setImageDrawable(resources.getDrawable(R.drawable.qrcode))
+        alert.setView(imageview)
+        alert.setMessage(getString(R.string.donation_address))
+        alert.setNegativeButton(getString(R.string.generic_done)
+        ) { dialog, id -> dialog.dismiss() }
+        alert.show()
+    }
+
+
+    private fun setupDrawer() {
+        mDrawerToggle = object : ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+            /** Called when a drawer has settled in a completely open state.  */
+            override fun onDrawerOpened(drawerView: View?) {
+                super.onDrawerOpened(drawerView)
+                invalidateOptionsMenu() // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state.  */
+            override fun onDrawerClosed(view: View?) {
+                super.onDrawerClosed(view)
+                invalidateOptionsMenu() // creates call to onPrepareOptionsMenu()
+            }
+        }
+        mDrawerToggle?.isDrawerIndicatorEnabled = true
+        mDrawerLayout.setDrawerListener(mDrawerToggle)
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle?.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        mDrawerToggle?.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.getItemId()
+
+        // Activate the navigation drawer toggle
+        return if (mDrawerToggle!!.onOptionsItemSelected(item)) {
+            true
+        } else super.onOptionsItemSelected(item)
+
     }
 
     override fun onDestroy() {

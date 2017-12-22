@@ -1,153 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.main.MainActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="104dp"
-            android:layout_gravity="top"
-            android:scaleType="centerInside"
-            android:src="@drawable/logo" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_gravity="top"
+                android:scaleType="centerInside"
+                android:src="@drawable/logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/i_own_label" />
+
+                <EditText
+                    android:id="@+id/edit_xrb_amount"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/xrb" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bitcoin_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/bitcoin_value" />
+
+            <TextView
+                android:id="@+id/usd_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/usd_value" />
+
+            <TextView
+                android:id="@+id/eur_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/eur_value" />
+
+            <TextView
+                android:id="@+id/gbp_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:text="@string/gbp_value" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                android:padding="24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:text="@string/current_conversion"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/conversion_rate_xrb_btc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/conversion_rate_xrb_btc" />
+
+            <TextView
+                android:id="@+id/conversion_rate_xrb_usd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/conversion_rate_xrb_usd" />
+
+            <TextView
+                android:id="@+id/conversion_rate_xrb_eur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/conversion_rate_xrb_eur" />
+
+            <TextView
+                android:id="@+id/conversion_rate_xrb_gbp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/conversion_rate_xrb_gbp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/i_own_label" />
+                android:gravity="center"
+                android:text="@string/powered_by"
+                android:textColor="@color/grey" />
 
-            <EditText
-                android:id="@+id/edit_xrb_amount"
-                android:layout_width="80dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="numberDecimal" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/xrb" />
+                <ImageView
+                    android:id="@+id/coindesk_logo"
+                    android:layout_width="0dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/coindesk" />
+
+                <ImageView
+                    android:id="@+id/bitgrail_logo"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/bitgrail" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/bitcoin_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/bitcoin_value" />
+        <include layout="@layout/full_screen_progress" />
 
-        <TextView
-            android:id="@+id/usd_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/usd_value" />
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/eur_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/eur_value" />
-
-        <TextView
-            android:id="@+id/gbp_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="16dp"
-            android:text="@string/gbp_value" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccent"
-            android:padding="24dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:text="@string/current_conversion"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/conversion_rate_xrb_btc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/conversion_rate_xrb_btc" />
-
-        <TextView
-            android:id="@+id/conversion_rate_xrb_usd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/conversion_rate_xrb_usd" />
-
-        <TextView
-            android:id="@+id/conversion_rate_xrb_eur"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/conversion_rate_xrb_eur" />
-
-        <TextView
-            android:id="@+id/conversion_rate_xrb_gbp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/conversion_rate_xrb_gbp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/powered_by"
-            android:textColor="@color/grey" />
-
-        <ImageView
-            android:id="@+id/coindesk_logo"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_gravity="top"
-            android:scaleType="centerInside"
-            android:src="@drawable/coindesk" />
-
-        <ImageView
-            android:id="@+id/bitgrail_logo"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_gravity="top"
-            android:scaleType="centerInside"
-            android:src="@drawable/bitgrail" />
-
-    </LinearLayout>
-
-    <include layout="@layout/full_screen_progress" />
-
-</FrameLayout>
+    <!-- The navigation drawer -->
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:background="@color/colorPrimaryDark" />
+</android.support.v4.widget.DrawerLayout>

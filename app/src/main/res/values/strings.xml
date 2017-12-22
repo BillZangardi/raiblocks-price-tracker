@@ -13,5 +13,9 @@
     <string name="current_conversion">Current Conversions</string>
     <string name="powered_by">Powered By:</string>
     <string name="error">Error Retrieving Data</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="donation_address">xrb_3rc735cjobnmz6f74o6x8oc5ceujchxythjcp3jqedqe33fqzh83i699q43b</string>
+    <string name="generic_done">Done</string>
 </resources>
 
