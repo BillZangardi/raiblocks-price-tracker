@@ -5,7 +5,6 @@ import me.billzangardi.rai.data.model.BitcoinResponse
 import me.billzangardi.rai.data.model.Data
 import me.billzangardi.rai.data.model.XrbResponse
 import me.billzangardi.rai.features.base.BasePresenter
-import me.billzangardi.rai.injection.ApplicationContext
 import me.billzangardi.rai.injection.ConfigPersistent
 import me.billzangardi.rai.util.rx.scheduler.SchedulerUtils
 import javax.inject.Inject
@@ -32,12 +31,10 @@ constructor(private val mDataManager: DataManager) : BasePresenter<MainView>() {
                                 mvpView?.showProgress(false)
                                 mvpView?.updateData()
                             }) { throwable ->
+                                mvpView?.showError(throwable)
                             }
                 }) { throwable ->
+                    mvpView?.showError(throwable)
                 }
-    }
-
-    private fun getConversion(currentRate: Double, bitcoinValue: Double): Double {
-        return bitcoinValue * currentRate
     }
 }

@@ -6,13 +6,18 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
+import butterknife.OnClick
 import me.billzangardi.rai.R
 import me.billzangardi.rai.data.model.Data
 import me.billzangardi.rai.features.base.BaseActivity
 import me.billzangardi.rai.prefs.MainPrefs
 import me.billzangardi.rai.util.ViewUtil
 import javax.inject.Inject
+import android.content.Intent
+import android.net.Uri
+
 
 class MainActivity : BaseActivity(), MainView {
 
@@ -73,7 +78,8 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showError(error: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+        updateData()
     }
 
     override fun storeData(data: Data) {
@@ -98,5 +104,15 @@ class MainActivity : BaseActivity(), MainView {
         mXrbToUsd.text = String.format(getString(R.string.conversion_rate_xrb_usd), prefs.xrbToUsd)
         mXrbToEur.text = String.format(getString(R.string.conversion_rate_xrb_eur), prefs.xrbToEur)
         mXrbToGbp.text = String.format(getString(R.string.conversion_rate_xrb_gbp), prefs.xrbToGbp)
+    }
+
+    @OnClick(R.id.coindesk_logo)
+    fun onCoindeskClick() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.coindesk.com/")))
+    }
+
+    @OnClick(R.id.bitgrail_logo)
+    fun onBitgrailClick() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://bitgrail.com/")))
     }
 }
