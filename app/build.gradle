@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "me.billzangardi.rai"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        def STRING = "String"
+        def BASE_URL = "BASE_URL"
+        def BITGRAIL_URL = "\"https://bcim-api-qa.els-ota.com/api/\""
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            applicationIdSuffix "." + name
+            buildConfigField STRING, BASE_URL, BITGRAIL_URL
+        }
+        release {
+            buildConfigField STRING, BASE_URL, BITGRAIL_URL
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFile 'proguard-rules.pro'
+            }
+        }
+    }
+
+    lintOptions {
+        textOutput "stdout"
+        textReport true
+        checkAllWarnings true
+        warningsAsErrors true
+        showAll true
+        explainIssues true
+        abortOnError false
+        lintConfig file("$projectDir/lint.xml")
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/license/LICENSE.base64.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    configurations.all {
+        resolutionStrategy.force "com.google.code.gson:gson:2.7"
+    }
+}
+
+apply from: 'dependencies.gradle'
+
+dependencies {
+
+    implementation supportLibs
+    implementation networkLibs
+    implementation rxJavaLibs
+    implementation uiLibs
+    implementation securityLibs
+    implementation pushNotificationsLibs
+    implementation roomPersistenceLibs
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //RxPermission for easy runtime permission management
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+
+    implementation "com.jakewharton:butterknife:$versions.butterKnife"
+    implementation "com.jakewharton.timber:timber:4.5.1"
+    implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
+
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+
+    debugImplementation leakCannaryDebug
+    releaseImplementation leakCannaryNoOp
+    testImplementation leakCannaryDebug
+
+    // APT dependencies
+    kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
+    kapt "android.arch.persistence.room:compiler:$versions.room"
+    kapt daggerCompiler
+    kaptTest daggerCompiler
+    kaptAndroidTest daggerCompiler
+
+    testImplementation unitTestLibs
+    androidTestImplementation androidTestsLibs
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test:1.1.2-2"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.1.2-2"
+
+    debugImplementation debugToolsLibs
+}
