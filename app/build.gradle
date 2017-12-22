@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 27
@@ -16,7 +17,7 @@ android {
     buildTypes {
         def STRING = "String"
         def BASE_URL = "BASE_URL"
-        def BITGRAIL_URL = "\"https://bcim-api-qa.els-ota.com/api/\""
+        def BITGRAIL_URL = "\"https://bitgrail.com/api/v1/\""
 
         debug {
             debuggable true
@@ -73,16 +74,13 @@ dependencies {
     implementation supportLibs
     implementation networkLibs
     implementation rxJavaLibs
-    implementation uiLibs
     implementation securityLibs
-    implementation pushNotificationsLibs
-    implementation roomPersistenceLibs
     implementation 'com.android.support:multidex:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //RxPermission for easy runtime permission management
-    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
 
     implementation "com.jakewharton:butterknife:$versions.butterKnife"
     implementation "com.jakewharton.timber:timber:4.5.1"

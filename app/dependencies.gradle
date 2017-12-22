@@ -68,24 +68,8 @@ ext {
             testRules      : "com.android.support.test:rules:$versions.espressoRunner",
     ] + mockito
 
-    ui = [
-            materialProgress: "com.pnikosis:materialish-progress:$versions.materialProgress",
-            caligraphy      : "uk.co.chrisjenx:calligraphy:$versions.caligraphy"
-    ]
-
     security = [
             hawk    : "com.orhanobut:hawk:$versions.hawk",
-            rootbeer: "com.scottyab:rootbeer-lib:$versions.rootbeer"
-    ]
-
-    pushNotifications = [
-            urbanAirship      : "com.urbanairship.android:urbanairship-sdk:$versions.urbanAirship",
-            googlePlayServices: "com.google.android.gms:play-services-gcm:$versions.playServices"
-    ]
-
-    roomPersistence = [
-            room      : "android.arch.persistence.room:runtime:$versions.room",
-            roomRxJava: "android.arch.persistence.room:rxjava2:$versions.room"
     ]
 
     debugTools = [
@@ -97,10 +81,7 @@ ext {
     rxJavaLibs = rxJava.values()
     unitTestLibs = unitTest.values()
     androidTestsLibs = androidTests.values() + supportLibs
-    uiLibs = ui.values()
     securityLibs = security.values()
-    pushNotificationsLibs = pushNotifications.values()
-    roomPersistenceLibs = roomPersistence.values()
     debugToolsLibs = debugTools.values()
 
     leakCannaryDebug = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
