@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Rai</string>
+    <string name="app_name">RaiBlocks</string>
     <string name="i_own_label">I own:</string>
     <string name="bitcoin_value">Bitcoin: %.7f</string>
     <string name="usd_value">USD: $ %.2f</string>

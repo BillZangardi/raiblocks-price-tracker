@@ -20,6 +20,16 @@ allprojects {
         google()
         jcenter()
     }
+
+    ext {
+        androidApplicationId = "me.billzangardi.raiblocks"
+
+        versionOffset = 0
+        versionMajor = 1
+        versionMinor = 0
+        versionPatch = 0
+        version_code = 1
+    }
 }
 
 task clean(type: Delete) {
