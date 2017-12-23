@@ -27,8 +27,8 @@ allprojects {
         versionOffset = 0
         versionMajor = 1
         versionMinor = 0
-        versionPatch = 0
-        version_code = 2
+        versionPatch = 1
+        version_code = 3
     }
 }
 
