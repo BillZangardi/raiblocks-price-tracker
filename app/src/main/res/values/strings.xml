@@ -3,12 +3,12 @@
     <string name="i_own_label">I own:</string>
     <string name="bitcoin_value">Bitcoin: %.7f</string>
     <string name="usd_value">USD: $ %.2f</string>
-    <string name="eur_value">GBP: € %.2f</string>
-    <string name="gbp_value">EUR: £ %.2f</string>
+    <string name="eur_value">EUR: € %.2f</string>
+    <string name="gbp_value">GBP: £ %.2f</string>
     <string name="conversion_rate_xrb_btc">1 RaiBlock = %.7f Bitcoin</string>
     <string name="conversion_rate_xrb_usd">1 RaiBlock = $ %.2f USD</string>
-    <string name="conversion_rate_xrb_eur">1 RaiBlock = £ %.2f EUR</string>
-    <string name="conversion_rate_xrb_gbp">1 RaiBlock = € %.2f GBP</string>
+    <string name="conversion_rate_xrb_eur">1 RaiBlock = € %.2f EUR</string>
+    <string name="conversion_rate_xrb_gbp">1 RaiBlock = £ %.2f GBP</string>
     <string name="xrb">XRB</string>
     <string name="current_conversion">Current Conversions</string>
     <string name="powered_by">Powered By:</string>
