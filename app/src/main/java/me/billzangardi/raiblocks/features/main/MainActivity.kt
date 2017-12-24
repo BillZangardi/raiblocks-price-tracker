@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
@@ -54,6 +55,7 @@ class MainActivity : BaseActivity(), MainView {
     lateinit var mDrawerLayout: DrawerLayout
 
     private var mAdapter: ArrayAdapter<String>? = null
+    private var mHandler: Handler? = null
 
     override val layout: Int
         get() = R.layout.activity_main
@@ -63,11 +65,8 @@ class MainActivity : BaseActivity(), MainView {
         activityComponent().inject(this)
         addDrawerItems()
         setupDrawer()
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setHomeButtonEnabled(true);
-        mMainPresenter.attachView(this)
-        mMainPresenter.fetchData()
         mXrbAmount.setText(MainPrefs.get(this).amountOwned.toString())
         mXrbAmount.setOnClickListener {
             mXrbAmount.setText("")
@@ -81,7 +80,34 @@ class MainActivity : BaseActivity(), MainView {
             }
             false
         }
+    }
+
+    private fun setupRefresh() {
+        val delay: Long = 10000 //10 seconds
+        var runnable: Runnable
+        mHandler = Handler()
+        mHandler!!.postDelayed(object : Runnable {
+            override fun run() {
+                if (mMainPresenter.isViewAttached) {
+                    mMainPresenter.fetchData()
+                }
+                runnable = this
+                mHandler?.postDelayed(runnable, delay)
+            }
+        }, delay)
+        mMainPresenter.fetchData()
         updateData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mMainPresenter.attachView(this)
+        setupRefresh()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mHandler = null
     }
 
     private fun addDrawerItems() {
