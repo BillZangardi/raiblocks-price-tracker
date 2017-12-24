@@ -17,5 +17,10 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="donation_address">xrb_3rc735cjobnmz6f74o6x8oc5ceujchxythjcp3jqedqe33fqzh83i699q43b</string>
     <string name="generic_done">Done</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+    <string name="coindesk_logo">CoinDesk Logo</string>
+    <string name="bitgrail_logo">BitGrail Logo</string>
+    <string name="last">Last</string>
 </resources>
 

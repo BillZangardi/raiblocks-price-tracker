@@ -41,14 +41,30 @@ class MainActivity : BaseActivity(), MainView {
     lateinit var mGbp: TextView
     @BindView(R.id.bitcoin_value)
     lateinit var mBitcoin: TextView
-    @BindView(R.id.conversion_rate_xrb_btc)
-    lateinit var mXrbToBtc: TextView
-    @BindView(R.id.conversion_rate_xrb_usd)
-    lateinit var mXrbToUsd: TextView
-    @BindView(R.id.conversion_rate_xrb_eur)
-    lateinit var mXrbToEur: TextView
-    @BindView(R.id.conversion_rate_xrb_gbp)
-    lateinit var mXrbToGbp: TextView
+    @BindView(R.id.usd_value_high)
+    lateinit var mUsdHigh: TextView
+    @BindView(R.id.eur_value_high)
+    lateinit var mEurHigh: TextView
+    @BindView(R.id.gbp_value_high)
+    lateinit var mGbpHigh: TextView
+    @BindView(R.id.bitcoin_value_high)
+    lateinit var mBitcoinHigh: TextView
+    @BindView(R.id.usd_value_low)
+    lateinit var mUsdLow: TextView
+    @BindView(R.id.eur_value_low)
+    lateinit var mEurLow: TextView
+    @BindView(R.id.gbp_value_low)
+    lateinit var mGbpLow: TextView
+    @BindView(R.id.bitcoin_value_low)
+    lateinit var mBitcoinLow: TextView
+    @BindView(R.id.bitcoin_value_last)
+    lateinit var mBitcoinlast: TextView
+    @BindView(R.id.usd_value_last)
+    lateinit var mUsdLast: TextView
+    @BindView(R.id.eur_value_last)
+    lateinit var mEurLast: TextView
+    @BindView(R.id.gbp_value_last)
+    lateinit var mGbpLast: TextView
     @BindView(R.id.navList)
     lateinit var mDrawerList: ListView
     @BindView(R.id.drawer_layout)
@@ -146,13 +162,11 @@ class MainActivity : BaseActivity(), MainView {
 
     private fun setupDrawer() {
         mDrawerToggle = object : ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-            /** Called when a drawer has settled in a completely open state.  */
             override fun onDrawerOpened(drawerView: View?) {
                 super.onDrawerOpened(drawerView)
                 invalidateOptionsMenu() // creates call to onPrepareOptionsMenu()
             }
 
-            /** Called when a drawer has settled in a completely closed state.  */
             override fun onDrawerClosed(view: View?) {
                 super.onDrawerClosed(view)
                 invalidateOptionsMenu() // creates call to onPrepareOptionsMenu()
@@ -175,12 +189,6 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.getItemId()
-
-        // Activate the navigation drawer toggle
         return if (mDrawerToggle!!.onOptionsItemSelected(item)) {
             true
         } else super.onOptionsItemSelected(item)
@@ -203,10 +211,18 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun storeData(data: Data) {
         val prefs = MainPrefs.get(this)
-        prefs.xrbToBtc = data.xrbToBtc
-        prefs.xrbToUsd = getConversion(data.btcToUsd, data.xrbToBtc)
-        prefs.xrbToEur = getConversion(data.btcToEur, data.xrbToBtc)
-        prefs.xrbToGbp = getConversion(data.btcToGbp, data.xrbToBtc)
+        prefs.xrbToBtc = data.xrbToBtcLast
+        prefs.xrbToBtcHigh = data.xrbToBtcHigh
+        prefs.xrbToBtcLow = data.xrbToBtcLow
+        prefs.xrbToUsd = getConversion(data.btcToUsd, data.xrbToBtcLast)
+        prefs.xrbToEur = getConversion(data.btcToEur, data.xrbToBtcLast)
+        prefs.xrbToGbp = getConversion(data.btcToGbp, data.xrbToBtcLast)
+        prefs.xrbToUsdHigh = getConversion(data.btcToUsd, data.xrbToBtcHigh)
+        prefs.xrbToEurHigh = getConversion(data.btcToEur, data.xrbToBtcHigh)
+        prefs.xrbToGbpHigh = getConversion(data.btcToGbp, data.xrbToBtcHigh)
+        prefs.xrbToUsdLow = getConversion(data.btcToUsd, data.xrbToBtcLow)
+        prefs.xrbToEurLow = getConversion(data.btcToEur, data.xrbToBtcLow)
+        prefs.xrbToGbpLow = getConversion(data.btcToGbp, data.xrbToBtcLow)
     }
 
     private fun getConversion(bitcoinValue: Float, xrbValueInBtc: Float): Float {
@@ -219,10 +235,18 @@ class MainActivity : BaseActivity(), MainView {
         mUsd.text = String.format(getString(R.string.usd_value), prefs.xrbToUsd * prefs.amountOwned)
         mEur.text = String.format(getString(R.string.eur_value), prefs.xrbToEur * prefs.amountOwned)
         mGbp.text = String.format(getString(R.string.gbp_value), prefs.xrbToGbp * prefs.amountOwned)
-        mXrbToBtc.text = String.format(getString(R.string.conversion_rate_xrb_btc), prefs.xrbToBtc)
-        mXrbToUsd.text = String.format(getString(R.string.conversion_rate_xrb_usd), prefs.xrbToUsd)
-        mXrbToEur.text = String.format(getString(R.string.conversion_rate_xrb_eur), prefs.xrbToEur)
-        mXrbToGbp.text = String.format(getString(R.string.conversion_rate_xrb_gbp), prefs.xrbToGbp)
+        mBitcoinHigh.text = String.format(getString(R.string.bitcoin_value), prefs.xrbToBtcHigh)
+        mUsdHigh.text = String.format(getString(R.string.usd_value), prefs.xrbToUsdHigh)
+        mEurHigh.text = String.format(getString(R.string.eur_value), prefs.xrbToEurHigh)
+        mGbpHigh.text = String.format(getString(R.string.gbp_value), prefs.xrbToGbpHigh)
+        mBitcoinLow.text = String.format(getString(R.string.bitcoin_value), prefs.xrbToBtcLow)
+        mUsdLow.text = String.format(getString(R.string.usd_value), prefs.xrbToUsdLow)
+        mEurLow.text = String.format(getString(R.string.eur_value), prefs.xrbToEurLow)
+        mGbpLow.text = String.format(getString(R.string.gbp_value), prefs.xrbToGbpLow)
+        mBitcoinlast.text = String.format(getString(R.string.bitcoin_value), prefs.xrbToBtc)
+        mUsdLast.text = String.format(getString(R.string.usd_value), prefs.xrbToUsd)
+        mEurLast.text = String.format(getString(R.string.eur_value), prefs.xrbToEur)
+        mGbpLast.text = String.format(getString(R.string.gbp_value), prefs.xrbToGbp)
     }
 
     @OnClick(R.id.coindesk_logo)

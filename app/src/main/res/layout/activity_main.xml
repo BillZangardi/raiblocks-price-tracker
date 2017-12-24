@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".features.main.MainActivity">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
@@ -49,30 +50,22 @@
 
             <TextView
                 android:id="@+id/bitcoin_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                style="@style/center_textview_style"
                 android:text="@string/bitcoin_value" />
 
             <TextView
                 android:id="@+id/usd_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                style="@style/center_textview_style"
                 android:text="@string/usd_value" />
 
             <TextView
                 android:id="@+id/eur_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                style="@style/center_textview_style"
                 android:text="@string/eur_value" />
 
             <TextView
                 android:id="@+id/gbp_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                style="@style/center_textview_style"
                 android:paddingBottom="16dp"
                 android:text="@string/gbp_value" />
 
@@ -82,42 +75,118 @@
                 android:background="@color/colorAccent"
                 android:padding="24dp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="16dp"
-                android:text="@string/current_conversion"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-            <TextView
-                android:id="@+id/conversion_rate_xrb_btc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/conversion_rate_xrb_btc" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/conversion_rate_xrb_usd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/conversion_rate_xrb_usd" />
+                    <TextView
+                        style="@style/center_textview_style"
+                        android:text="@string/high"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/conversion_rate_xrb_eur"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/conversion_rate_xrb_eur" />
+                    <TextView
+                        android:id="@+id/bitcoin_value_high"
+                        style="@style/center_textview_style"
+                        android:text="@string/bitcoin_value" />
 
-            <TextView
-                android:id="@+id/conversion_rate_xrb_gbp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/conversion_rate_xrb_gbp" />
+                    <TextView
+                        android:id="@+id/usd_value_high"
+                        style="@style/center_textview_style"
+                        android:text="@string/usd_value" />
+
+                    <TextView
+                        android:id="@+id/eur_value_high"
+                        style="@style/center_textview_style"
+                        android:text="@string/eur_value" />
+
+                    <TextView
+                        android:id="@+id/gbp_value_high"
+                        style="@style/center_textview_style"
+                        android:paddingBottom="16dp"
+                        android:text="@string/gbp_value" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/center_textview_style"
+                        android:text="@string/last"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bitcoin_value_last"
+                        style="@style/center_textview_style"
+                        android:text="@string/bitcoin_value" />
+
+                    <TextView
+                        android:id="@+id/usd_value_last"
+                        style="@style/center_textview_style"
+                        android:text="@string/usd_value" />
+
+                    <TextView
+                        android:id="@+id/eur_value_last"
+                        style="@style/center_textview_style"
+                        android:text="@string/eur_value" />
+
+                    <TextView
+                        android:id="@+id/gbp_value_last"
+                        style="@style/center_textview_style"
+                        android:paddingBottom="16dp"
+                        android:text="@string/gbp_value" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/center_textview_style"
+                        android:text="@string/low"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bitcoin_value_low"
+                        style="@style/center_textview_style"
+                        android:text="@string/bitcoin_value" />
+
+                    <TextView
+                        android:id="@+id/usd_value_low"
+                        style="@style/center_textview_style"
+                        android:text="@string/usd_value" />
+
+                    <TextView
+                        android:id="@+id/eur_value_low"
+                        style="@style/center_textview_style"
+                        android:text="@string/eur_value" />
+
+                    <TextView
+                        android:id="@+id/gbp_value_low"
+                        style="@style/center_textview_style"
+                        android:paddingBottom="16dp"
+                        android:text="@string/gbp_value" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -129,9 +198,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                style="@style/center_textview_style"
                 android:text="@string/powered_by"
                 android:textColor="@color/grey" />
 
@@ -149,6 +216,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/coindesk_logo"
                     android:scaleType="centerInside"
                     android:src="@drawable/coindesk" />
 
@@ -159,6 +227,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/bitgrail_logo"
                     android:scaleType="centerInside"
                     android:src="@drawable/bitgrail" />
             </LinearLayout>

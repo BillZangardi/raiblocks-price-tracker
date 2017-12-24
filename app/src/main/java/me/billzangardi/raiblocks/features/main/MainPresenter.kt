@@ -26,7 +26,7 @@ constructor(private val mDataManager: DataManager) : BasePresenter<MainView>() {
                 .subscribe({ xrbResponse ->
                     mDataManager.getBitcoinPrice().compose<BitcoinResponse>(SchedulerUtils.ioToMain<BitcoinResponse>())
                             .subscribe({ bitcoinResponse ->
-                                val data: Data = Data(bitcoinResponse.bpi!!.uSD!!.rateFloat, bitcoinResponse.bpi!!.eUR!!.rateFloat, bitcoinResponse.bpi!!.gBP!!.rateFloat, xrbResponse!!.response!!.last!!.toFloat())
+                                val data: Data = Data(bitcoinResponse.bpi!!.uSD!!.rateFloat, bitcoinResponse.bpi!!.eUR!!.rateFloat, bitcoinResponse.bpi!!.gBP!!.rateFloat, xrbResponse!!.response!!.last!!.toFloat(), xrbResponse!!.response!!.high!!.toFloat(), xrbResponse!!.response!!.low!!.toFloat())
                                 mvpView?.storeData(data)
                                 mvpView?.showProgress(false)
                                 mvpView?.updateData()
