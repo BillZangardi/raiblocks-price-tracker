@@ -31,10 +31,6 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
 
-    companion object {
-        val DATA_CHANGED = "raiblocks.DATA_CHANGED"
-    }
-
     @Inject lateinit var mMainPresenter: MainPresenter
     private var mDrawerToggle: ActionBarDrawerToggle? = null
 
@@ -257,20 +253,28 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun updateWidgets() {
-        val ownedIntent = Intent(this, OwnedXrbWidgetProvider::class.java)
-        ownedIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        val tickerIntent = Intent(this, TickerWidgetProvider::class.java)
-        tickerIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        val ownedIds = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, OwnedXrbWidgetProvider::class.java))
-        val tickerIds = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, TickerWidgetProvider::class.java))
-        val ownedWidget = OwnedXrbWidgetProvider()
-        ownedWidget.onUpdate(this, AppWidgetManager.getInstance(this), ownedIds)
-        ownedIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ownedIds)
-        sendBroadcast(ownedIntent)
-        val tickerWidget = TickerWidgetProvider()
-        tickerWidget.onUpdate(this, AppWidgetManager.getInstance(this), ownedIds)
-        tickerIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, tickerIds)
-        sendBroadcast(tickerIntent)
+        updateTickerWidget()
+        updateOwnedWidget()
+    }
+
+    private fun updateOwnedWidget() {
+        val intent = Intent(this, OwnedXrbWidgetProvider::class.java)
+        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, OwnedXrbWidgetProvider::class.java))
+        val myWidget = OwnedXrbWidgetProvider()
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        sendBroadcast(intent)
+    }
+
+    private fun updateTickerWidget() {
+        val intent = Intent(this, TickerWidgetProvider::class.java)
+        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, TickerWidgetProvider::class.java!!))
+        val myWidget = TickerWidgetProvider()
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        sendBroadcast(intent)
     }
 
     @OnClick(R.id.coindesk_logo)

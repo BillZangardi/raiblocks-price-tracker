@@ -45,15 +45,10 @@ class OwnedXrbWidgetProvider : AppWidgetProvider(), MainView {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent?.action == MainActivity.DATA_CHANGED) {
-            this.context = context
-            mMainPresenter = MainPresenter(DataManager(BitgrailApiFactory.makeStarterService(), CoindeskApiFactory.makeStarterService()))
-            mMainPresenter?.attachView(this)
-            mMainPresenter?.fetchData()
-        } else {
-            super.onReceive(context, intent)
-
-        }
+        this.context = context
+        mMainPresenter = MainPresenter(DataManager(BitgrailApiFactory.makeStarterService(), CoindeskApiFactory.makeStarterService()))
+        mMainPresenter?.attachView(this)
+        mMainPresenter?.fetchData()
     }
 
     override fun showProgress(show: Boolean) {

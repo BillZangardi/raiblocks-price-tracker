@@ -30,7 +30,6 @@
             android:label="@string/raiblock_xrb_ticker">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="raiblocks.DATA_CHANGED" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
@@ -41,7 +40,6 @@
             android:label="@string/raiblock_xrb_owned">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="raiblocks.DATA_CHANGED" />
 
             </intent-filter>
             <meta-data
