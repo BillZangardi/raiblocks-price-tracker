@@ -1,20 +1,10 @@
 package me.billzangardi.raiblocks.providers
 
 import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.content.Intent
 import android.widget.RemoteViews
 import me.billzangardi.raiblocks.R
-import me.billzangardi.raiblocks.data.DataManager
-import me.billzangardi.raiblocks.data.model.Data
-import me.billzangardi.raiblocks.data.services.BitgrailApiFactory
-import me.billzangardi.raiblocks.data.services.CoindeskApiFactory
-import me.billzangardi.raiblocks.features.main.MainActivity
-import me.billzangardi.raiblocks.features.main.MainPresenter
-import me.billzangardi.raiblocks.features.main.MainView
 import me.billzangardi.raiblocks.prefs.MainPrefs
-import me.billzangardi.raiblocks.util.ViewUtil
 
 /**
  * Created by zangardiw on 12/26/17.

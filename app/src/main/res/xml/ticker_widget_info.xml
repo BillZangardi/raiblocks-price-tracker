@@ -2,7 +2,7 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/ticker_widget"
     android:minHeight="136dp"
-    android:minWidth="256dp"
+    android:minWidth="280dp"
     android:previewImage="@drawable/ticker_widget"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"

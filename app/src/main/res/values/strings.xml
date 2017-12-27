@@ -23,7 +23,7 @@
     <string name="bitgrail_logo">BitGrail Logo</string>
     <string name="last">Last</string>
     <string name="my_xrb">My XRB</string>
-    <string name="raiblock_xrb_ticker">RaiBlock (XRB) Ticker</string>
-    <string name="raiblock_xrb_owned">RaiBlock (XRB) Owned</string>
+    <string name="raiblock_xrb_ticker">Ticker</string>
+    <string name="raiblock_xrb_owned">Owned</string>
 </resources>
 
