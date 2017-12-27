@@ -86,8 +86,8 @@ class MainActivity : BaseActivity(), MainView {
         activityComponent().inject(this)
         addDrawerItems()
         setupDrawer()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        supportActionBar?.setHomeButtonEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         mXrbAmount.setText(MainPrefs.get(this).amountOwned.toString())
         mXrbAmount.setOnClickListener {
             mXrbAmount.setText("")

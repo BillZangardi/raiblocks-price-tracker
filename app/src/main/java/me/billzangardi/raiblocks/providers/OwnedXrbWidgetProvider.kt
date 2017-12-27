@@ -10,7 +10,6 @@ import me.billzangardi.raiblocks.data.DataManager
 import me.billzangardi.raiblocks.data.model.Data
 import me.billzangardi.raiblocks.data.services.BitgrailApiFactory
 import me.billzangardi.raiblocks.data.services.CoindeskApiFactory
-import me.billzangardi.raiblocks.features.main.MainActivity
 import me.billzangardi.raiblocks.features.main.MainPresenter
 import me.billzangardi.raiblocks.features.main.MainView
 import me.billzangardi.raiblocks.prefs.MainPrefs
@@ -29,22 +28,20 @@ class OwnedXrbWidgetProvider : AppWidgetProvider(), MainView {
 
     override fun onEnabled(context: Context?) {
         super.onEnabled(context)
-        this.context = context
-        mMainPresenter = MainPresenter(DataManager(BitgrailApiFactory.makeStarterService(), CoindeskApiFactory.makeStarterService()))
-        mMainPresenter?.attachView(this)
-        mMainPresenter?.fetchData()
+        setup(context)
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        this.context = context
         this.appWidgetIds = appWidgetIds
         this.appWidgetManager = appWidgetManager
-        mMainPresenter = MainPresenter(DataManager(BitgrailApiFactory.makeStarterService(), CoindeskApiFactory.makeStarterService()))
-        mMainPresenter?.attachView(this)
-        mMainPresenter?.fetchData()
+        setup(context)
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
+        setup(context)
+    }
+
+    private fun setup(context: Context?) {
         this.context = context
         mMainPresenter = MainPresenter(DataManager(BitgrailApiFactory.makeStarterService(), CoindeskApiFactory.makeStarterService()))
         mMainPresenter?.attachView(this)
