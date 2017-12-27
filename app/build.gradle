@@ -4,14 +4,24 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'jacoco'
 
+apply from: 'secret_keys.gradle'
+
 android {
+    signingConfigs {
+        config {
+            keyAlias alias
+            keyPassword keyPw
+            storeFile file(storeFilePath)
+            storePassword storePw
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "me.billzangardi.rai"
+        applicationId androidApplicationId
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode version_code
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,7 +30,6 @@ android {
         def COINDESK_API = "COINDESK_API"
         def BITGRAIL_URL = "\"https://bitgrail.com/api/v1/\""
         def COINDESK_URL = "\"https://api.coindesk.com/v1/bpi/\""
-
         debug {
             debuggable true
             minifyEnabled false
@@ -29,6 +38,8 @@ android {
             buildConfigField STRING, COINDESK_API, COINDESK_URL
         }
         release {
+            debuggable false
+            signingConfig signingConfigs.config
             buildConfigField STRING, BITGRAIL_API, BITGRAIL_URL
             buildConfigField STRING, COINDESK_API, COINDESK_URL
             postprocessing {
@@ -40,7 +51,6 @@ android {
             }
         }
     }
-
     lintOptions {
         textOutput "stdout"
         textReport true
@@ -51,7 +61,6 @@ android {
         abortOnError false
         lintConfig file("$projectDir/lint.xml")
     }
-
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'LICENSE.txt'
@@ -60,59 +69,52 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/rxjava.properties'
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     configurations.all {
         resolutionStrategy.force "com.google.code.gson:gson:2.7"
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output -> outputFileName = "${applicationId}-${variant.versionName}-${variant.versionCode}.apk"
+        }
     }
 }
 
 apply from: 'dependencies.gradle'
 
 dependencies {
-
     implementation supportLibs
     implementation networkLibs
     implementation rxJavaLibs
     implementation 'com.android.support:multidex:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
     //RxPermission for easy runtime permission management
     implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
-
     implementation "com.jakewharton:butterknife:$versions.butterKnife"
-    implementation "com.jakewharton.timber:timber:4.5.1"
-    implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
-
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     implementation "com.google.dagger:dagger:$versions.dagger"
-    compileOnly 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
-
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    //Required by Dagger2
     debugImplementation leakCannaryDebug
     releaseImplementation leakCannaryNoOp
     testImplementation leakCannaryDebug
-
     // android-prefs library
     kapt "org.jraf:prefs-compiler:$versions.prefsVersion"
     annotationProcessor "org.jraf:prefs-compiler:$versions.prefsVersion"
     implementation "org.jraf:prefs:$versions.prefsVersion"
-
     // APT dependencies
     kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
     kapt "android.arch.persistence.room:compiler:$versions.room"
     kapt daggerCompiler
     kaptTest daggerCompiler
     kaptAndroidTest daggerCompiler
-
     testImplementation unitTestLibs
     androidTestImplementation androidTestsLibs
-
-    testImplementation "org.jetbrains.kotlin:kotlin-test:1.1.2-2"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.1.2-2"
-
+    testImplementation 'org.jetbrains.kotlin:kotlin-test:1.1.2-2'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit:1.1.2-2'
     debugImplementation debugToolsLibs
 }
