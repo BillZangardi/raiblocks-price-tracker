@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="me.billzangardi.raiblocks.features.main.MainActivity"
+        <activity
+            android:name="me.billzangardi.raiblocks.features.main.MainActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +24,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".providers.TickerWidgetProvider"
+            android:label="@string/raiblock_xrb_ticker">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="raiblocks.DATA_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ticker_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".providers.OwnedXrbWidgetProvider"
+            android:label="@string/raiblock_xrb_owned">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="raiblocks.DATA_CHANGED" />
+
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/owned_xrb_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

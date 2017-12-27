@@ -1,5 +1,7 @@
 package me.billzangardi.raiblocks.features.main
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
@@ -20,11 +22,18 @@ import me.billzangardi.raiblocks.R
 import me.billzangardi.raiblocks.data.model.Data
 import me.billzangardi.raiblocks.features.base.BaseActivity
 import me.billzangardi.raiblocks.prefs.MainPrefs
+import me.billzangardi.raiblocks.providers.OwnedXrbWidgetProvider
+import me.billzangardi.raiblocks.providers.TickerWidgetProvider
 import me.billzangardi.raiblocks.util.ViewUtil
+import me.billzangardi.raiblocks.util.ViewUtil.getConversion
 import javax.inject.Inject
 
 
 class MainActivity : BaseActivity(), MainView {
+
+    companion object {
+        val DATA_CHANGED = "raiblocks.DATA_CHANGED"
+    }
 
     @Inject lateinit var mMainPresenter: MainPresenter
     private var mDrawerToggle: ActionBarDrawerToggle? = null
@@ -92,6 +101,7 @@ class MainActivity : BaseActivity(), MainView {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 MainPrefs.get(this).amountOwned = mXrbAmount.text.toString().toFloat()
                 updateData()
+                mXrbAmount.isCursorVisible = false
                 true
             }
             false
@@ -99,7 +109,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun setupRefresh() {
-        val delay: Long = 10000 //10 seconds
+        val delay: Long = 30000 //30 seconds
         var runnable: Runnable
         mHandler = Handler()
         mHandler!!.postDelayed(object : Runnable {
@@ -225,10 +235,6 @@ class MainActivity : BaseActivity(), MainView {
         prefs.xrbToGbpLow = getConversion(data.btcToGbp, data.xrbToBtcLow)
     }
 
-    private fun getConversion(bitcoinValue: Float, xrbValueInBtc: Float): Float {
-        return bitcoinValue * xrbValueInBtc
-    }
-
     override fun updateData() {
         val prefs = MainPrefs.get(this)
         mBitcoin.text = String.format(getString(R.string.bitcoin_value), prefs.xrbToBtc * prefs.amountOwned)
@@ -247,6 +253,24 @@ class MainActivity : BaseActivity(), MainView {
         mUsdLast.text = String.format(getString(R.string.usd_value), prefs.xrbToUsd)
         mEurLast.text = String.format(getString(R.string.eur_value), prefs.xrbToEur)
         mGbpLast.text = String.format(getString(R.string.gbp_value), prefs.xrbToGbp)
+        updateWidgets()
+    }
+
+    private fun updateWidgets() {
+        val ownedIntent = Intent(this, OwnedXrbWidgetProvider::class.java)
+        ownedIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val tickerIntent = Intent(this, TickerWidgetProvider::class.java)
+        tickerIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        val ownedIds = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, OwnedXrbWidgetProvider::class.java))
+        val tickerIds = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, TickerWidgetProvider::class.java))
+        val ownedWidget = OwnedXrbWidgetProvider()
+        ownedWidget.onUpdate(this, AppWidgetManager.getInstance(this), ownedIds)
+        ownedIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ownedIds)
+        sendBroadcast(ownedIntent)
+        val tickerWidget = TickerWidgetProvider()
+        tickerWidget.onUpdate(this, AppWidgetManager.getInstance(this), ownedIds)
+        tickerIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, tickerIds)
+        sendBroadcast(tickerIntent)
     }
 
     @OnClick(R.id.coindesk_logo)

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/center_textview_style"
+            android:text="@string/high"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bitcoin_value_high"
+            style="@style/center_textview_style"
+            android:text="@string/bitcoin_value" />
+
+        <TextView
+            android:id="@+id/usd_value_high"
+            style="@style/center_textview_style"
+            android:text="@string/usd_value" />
+
+        <TextView
+            android:id="@+id/eur_value_high"
+            style="@style/center_textview_style"
+            android:text="@string/eur_value" />
+
+        <TextView
+            android:id="@+id/gbp_value_high"
+            style="@style/center_textview_style"
+            android:paddingBottom="16dp"
+            android:text="@string/gbp_value" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/center_textview_style"
+            android:text="@string/last"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bitcoin_value_last"
+            style="@style/center_textview_style"
+            android:text="@string/bitcoin_value" />
+
+        <TextView
+            android:id="@+id/usd_value_last"
+            style="@style/center_textview_style"
+            android:text="@string/usd_value" />
+
+        <TextView
+            android:id="@+id/eur_value_last"
+            style="@style/center_textview_style"
+            android:text="@string/eur_value" />
+
+        <TextView
+            android:id="@+id/gbp_value_last"
+            style="@style/center_textview_style"
+            android:paddingBottom="16dp"
+            android:text="@string/gbp_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/center_textview_style"
+            android:text="@string/low"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bitcoin_value_low"
+            style="@style/center_textview_style"
+            android:text="@string/bitcoin_value" />
+
+        <TextView
+            android:id="@+id/usd_value_low"
+            style="@style/center_textview_style"
+            android:text="@string/usd_value" />
+
+        <TextView
+            android:id="@+id/eur_value_low"
+            style="@style/center_textview_style"
+            android:text="@string/eur_value" />
+
+        <TextView
+            android:id="@+id/gbp_value_low"
+            style="@style/center_textview_style"
+            android:paddingBottom="8dp"
+            android:text="@string/gbp_value" />
+
+    </LinearLayout>
+
+</LinearLayout>

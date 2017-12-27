@@ -22,4 +22,8 @@ object ViewUtil {
         imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, 0)
     }
 
+    fun getConversion(bitcoinValue: Float, xrbValueInBtc: Float): Float {
+        return bitcoinValue * xrbValueInBtc
+    }
+
 }

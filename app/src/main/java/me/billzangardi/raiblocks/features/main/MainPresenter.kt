@@ -15,9 +15,6 @@ import javax.inject.Inject
 @ConfigPersistent
 class MainPresenter @Inject
 constructor(private val mDataManager: DataManager) : BasePresenter<MainView>() {
-    override fun attachView(mvpView: MainView) {
-        super.attachView(mvpView)
-    }
 
     fun fetchData() {
         checkViewAttached()
@@ -26,15 +23,17 @@ constructor(private val mDataManager: DataManager) : BasePresenter<MainView>() {
                 .subscribe({ xrbResponse ->
                     mDataManager.getBitcoinPrice().compose<BitcoinResponse>(SchedulerUtils.ioToMain<BitcoinResponse>())
                             .subscribe({ bitcoinResponse ->
-                                val data: Data = Data(bitcoinResponse.bpi!!.uSD!!.rateFloat, bitcoinResponse.bpi!!.eUR!!.rateFloat, bitcoinResponse.bpi!!.gBP!!.rateFloat, xrbResponse!!.response!!.last!!.toFloat(), xrbResponse!!.response!!.high!!.toFloat(), xrbResponse!!.response!!.low!!.toFloat())
+                                val data = Data(bitcoinResponse.bpi!!.uSD!!.rateFloat, bitcoinResponse.bpi!!.eUR!!.rateFloat, bitcoinResponse.bpi!!.gBP!!.rateFloat, xrbResponse!!.response!!.last!!.toFloat(), xrbResponse!!.response!!.high!!.toFloat(), xrbResponse!!.response!!.low!!.toFloat())
                                 mvpView?.storeData(data)
                                 mvpView?.showProgress(false)
                                 mvpView?.updateData()
                             }) { throwable ->
                                 mvpView?.showError(throwable)
+                                mvpView?.showProgress(false)
                             }
                 }) { throwable ->
                     mvpView?.showError(throwable)
+                    mvpView?.showProgress(false)
                 }
     }
 }

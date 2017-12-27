@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/bitcoin_value"
+        style="@style/center_textview_style"
+        android:text="@string/bitcoin_value" />
+
+    <TextView
+        android:id="@+id/usd_value"
+        style="@style/center_textview_style"
+        android:text="@string/usd_value" />
+
+    <TextView
+        android:id="@+id/eur_value"
+        style="@style/center_textview_style"
+        android:text="@string/eur_value" />
+
+    <TextView
+        android:id="@+id/gbp_value"
+        style="@style/center_textview_style"
+        android:paddingBottom="16dp"
+        android:text="@string/gbp_value" />
+
+</LinearLayout>
