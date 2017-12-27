@@ -31,6 +31,10 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
 
+    companion object {
+        val DATA_UPDATED = "DATA_UPDATED"
+    }
+
     @Inject lateinit var mMainPresenter: MainPresenter
     private var mDrawerToggle: ActionBarDrawerToggle? = null
 
@@ -259,7 +263,7 @@ class MainActivity : BaseActivity(), MainView {
 
     private fun updateOwnedWidget() {
         val intent = Intent(this, OwnedXrbWidgetProvider::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        intent.action = DATA_UPDATED
         val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, OwnedXrbWidgetProvider::class.java))
         val myWidget = OwnedXrbWidgetProvider()
         myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
@@ -269,7 +273,7 @@ class MainActivity : BaseActivity(), MainView {
 
     private fun updateTickerWidget() {
         val intent = Intent(this, TickerWidgetProvider::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        intent.action = DATA_UPDATED
         val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, TickerWidgetProvider::class.java!!))
         val myWidget = TickerWidgetProvider()
         myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
