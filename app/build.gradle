@@ -23,6 +23,7 @@ android {
         targetSdkVersion 27
         versionCode version_code
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         def STRING = "String"

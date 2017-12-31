@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -21,6 +22,8 @@ import butterknife.OnClick
 import me.billzangardi.raiblocks.R
 import me.billzangardi.raiblocks.data.model.Data
 import me.billzangardi.raiblocks.features.base.BaseActivity
+import me.billzangardi.raiblocks.features.settings.SettingsActivity
+import me.billzangardi.raiblocks.prefs.Main
 import me.billzangardi.raiblocks.prefs.MainPrefs
 import me.billzangardi.raiblocks.providers.OwnedXrbWidgetProvider
 import me.billzangardi.raiblocks.providers.TickerWidgetProvider
@@ -99,13 +102,20 @@ class MainActivity : BaseActivity(), MainView {
         mXrbAmount.setOnEditorActionListener { _, actionId, _ ->
             ViewUtil.hideKeyboard(this)
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                MainPrefs.get(this).amountOwned = mXrbAmount.text.toString().toFloat()
+                if (ViewUtil.isNumeric(mXrbAmount.text.toString())) {
+                    MainPrefs.get(this).amountOwned = mXrbAmount.text.toString().toFloat()
+                }
                 updateData()
                 mXrbAmount.isCursorVisible = false
                 true
             }
             false
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
     }
 
     private fun setupRefresh() {
@@ -129,6 +139,42 @@ class MainActivity : BaseActivity(), MainView {
         super.onResume()
         mMainPresenter.attachView(this)
         setupRefresh()
+        currencyPreferences()
+    }
+
+    private fun currencyPreferences() {
+        var displayBtc = false
+        var displayUsd = false
+        var displayEuro = false
+        var displayPound = false
+        MainPrefs.get(this).displayCurrencys.forEach { currency ->
+            when (currency) {
+                Main.BITCOIN -> displayBtc = true
+                Main.USD -> displayUsd = true
+                Main.EURO -> displayEuro = true
+                Main.POUND -> displayPound = true
+            }
+        }
+        // BTC
+        mBitcoin.visibility = if (displayBtc) View.VISIBLE else View.GONE
+        mBitcoinLow.visibility = if (displayBtc) View.VISIBLE else View.GONE
+        mBitcoinHigh.visibility = if (displayBtc) View.VISIBLE else View.GONE
+        mBitcoinlast.visibility = if (displayBtc) View.VISIBLE else View.GONE
+        // USD
+        mUsd.visibility = if (displayUsd) View.VISIBLE else View.GONE
+        mUsdLow.visibility = if (displayUsd) View.VISIBLE else View.GONE
+        mUsdHigh.visibility = if (displayUsd) View.VISIBLE else View.GONE
+        mUsdLast.visibility = if (displayUsd) View.VISIBLE else View.GONE
+        // EURO
+        mEur.visibility = if (displayEuro) View.VISIBLE else View.GONE
+        mEurLow.visibility = if (displayEuro) View.VISIBLE else View.GONE
+        mEurHigh.visibility = if (displayEuro) View.VISIBLE else View.GONE
+        mEurLast.visibility = if (displayEuro) View.VISIBLE else View.GONE
+        // POUND
+        mGbp.visibility = if (displayPound) View.VISIBLE else View.GONE
+        mGbpLow.visibility = if (displayPound) View.VISIBLE else View.GONE
+        mGbpHigh.visibility = if (displayPound) View.VISIBLE else View.GONE
+        mGbpLast.visibility = if (displayPound) View.VISIBLE else View.GONE
     }
 
     override fun onStop() {
@@ -172,12 +218,12 @@ class MainActivity : BaseActivity(), MainView {
 
     private fun setupDrawer() {
         mDrawerToggle = object : ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-            override fun onDrawerOpened(drawerView: View?) {
+            override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
                 invalidateOptionsMenu() // creates call to onPrepareOptionsMenu()
             }
 
-            override fun onDrawerClosed(view: View?) {
+            override fun onDrawerClosed(view: View) {
                 super.onDrawerClosed(view)
                 invalidateOptionsMenu() // creates call to onPrepareOptionsMenu()
             }
@@ -199,9 +245,15 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return if (mDrawerToggle!!.onOptionsItemSelected(item)) {
             true
-        } else super.onOptionsItemSelected(item)
+        } else {
+            when (item.itemId) {
+                R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
+            }
+            return false
+        }
 
     }
 

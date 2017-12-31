@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="me.billzangardi.raiblocks.RaiApplication"
+        android:name=".RaiApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="me.billzangardi.raiblocks.features.main.MainActivity"
+            android:name=".features.main.MainActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,13 +24,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".features.settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            >
+        </activity>
         <receiver
             android:name=".providers.TickerWidgetProvider"
             android:label="@string/raiblock_xrb_ticker">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/ticker_widget_info" />
@@ -40,12 +45,27 @@
             android:label="@string/raiblock_xrb_owned">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/owned_xrb_widget_info" />
         </receiver>
+        <receiver
+            android:name=".providers.PriceWidgetProvider"
+            android:label="@string/raiblock_price">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/price_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".features.settings.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

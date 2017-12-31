@@ -25,5 +25,8 @@
     <string name="my_xrb">My XRB</string>
     <string name="raiblock_xrb_ticker">Ticker</string>
     <string name="raiblock_xrb_owned">Owned</string>
+    <string name="raiblock_price">Price</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="toolbar_settings">Settings</string>
 </resources>
 

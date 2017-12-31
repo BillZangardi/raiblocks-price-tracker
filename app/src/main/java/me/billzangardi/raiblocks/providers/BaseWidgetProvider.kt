@@ -11,9 +11,9 @@ import me.billzangardi.raiblocks.data.services.CoindeskApiFactory
 import me.billzangardi.raiblocks.features.main.MainActivity
 import me.billzangardi.raiblocks.features.main.MainPresenter
 import me.billzangardi.raiblocks.features.main.MainView
+import me.billzangardi.raiblocks.prefs.Main
 import me.billzangardi.raiblocks.prefs.MainPrefs
 import me.billzangardi.raiblocks.util.ViewUtil
-import timber.log.Timber
 
 /**
  * Created by zangardiw on 12/26/17.
@@ -62,7 +62,19 @@ abstract class BaseWidgetProvider : AppWidgetProvider(), MainView {
 
 
     override fun updateData() {
-        updateViews(context, appWidgetManager, appWidgetIds)
+        var displayBtc = false
+        var displayUsd = false
+        var displayEuro = false
+        var displayPound = false
+        MainPrefs.get(context).displayCurrencys.forEach { currency ->
+            when (currency) {
+                Main.BITCOIN -> displayBtc = true
+                Main.USD -> displayUsd = true
+                Main.EURO -> displayEuro = true
+                Main.POUND -> displayPound = true
+            }
+        }
+        updateViews(context, appWidgetManager, appWidgetIds, displayBtc, displayUsd, displayEuro, displayPound)
     }
 
     override fun storeData(data: Data) {
@@ -81,5 +93,6 @@ abstract class BaseWidgetProvider : AppWidgetProvider(), MainView {
         prefs.xrbToGbpLow = ViewUtil.getConversion(data.btcToGbp, data.xrbToBtcLow)
     }
 
-    abstract fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?)
+    abstract fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean)
+
 }
