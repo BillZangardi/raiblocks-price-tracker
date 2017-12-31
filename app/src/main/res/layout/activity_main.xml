@@ -50,13 +50,20 @@
 
             </LinearLayout>
 
-            <include layout="@layout/owned_xrb"/>
+            <include layout="@layout/owned_xrb" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent"
-                android:padding="24dp" />
+                android:background="@color/colorAccent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
 
             <include layout="@layout/high_last_low" />
 
@@ -111,10 +118,26 @@
     </FrameLayout>
 
     <!-- The navigation drawer -->
-    <ListView
-        android:id="@+id/navList"
+    <FrameLayout
         android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left|start"
-        android:background="@color/colorPrimaryDark" />
+        android:layout_gravity="left|start">
+
+        <ListView
+            android:id="@+id/navList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|start|top"
+            android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|start|bottom"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            tools:text="v1.0.0" />
+    </FrameLayout>
+
 </android.support.v4.widget.DrawerLayout>

@@ -19,6 +19,7 @@ import android.widget.*
 import android.widget.AdapterView
 import butterknife.BindView
 import butterknife.OnClick
+import me.billzangardi.raiblocks.BuildConfig
 import me.billzangardi.raiblocks.R
 import me.billzangardi.raiblocks.data.model.Data
 import me.billzangardi.raiblocks.features.base.BaseActivity
@@ -83,6 +84,8 @@ class MainActivity : BaseActivity(), MainView {
     lateinit var mDrawerList: ListView
     @BindView(R.id.drawer_layout)
     lateinit var mDrawerLayout: DrawerLayout
+    @BindView(R.id.version)
+    lateinit var mVersion: TextView
 
     private var mAdapter: ArrayAdapter<String>? = null
     private var mHandler: Handler? = null
@@ -113,6 +116,7 @@ class MainActivity : BaseActivity(), MainView {
             }
             false
         }
+        mVersion.text = String.format("v%s(%s)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -140,7 +144,7 @@ class MainActivity : BaseActivity(), MainView {
     override fun onResume() {
         super.onResume()
         mMainPresenter.attachView(this)
-        if(NetworkUtil.isNetworkConnected(this@MainActivity)) {
+        if (NetworkUtil.isNetworkConnected(this@MainActivity)) {
             setupRefresh()
         } else {
             Toast.makeText(this, R.string.internet_required, Toast.LENGTH_LONG).show()

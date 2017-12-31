@@ -12,12 +12,11 @@ class PriceWidgetProvider : BaseWidgetProvider() {
         val prefs = MainPrefs.get(context)
         val remoteViews = RemoteViews(context!!.packageName,
                 R.layout.price_widget)
-        var string = ""
-        when (prefs.singleWidgetCurrency) {
-            Main.BITCOIN -> string = String.format(" %.7f", prefs.xrbToBtc)
-            Main.USD -> string = String.format("$ %.2f", prefs.xrbToUsd)
-            Main.EURO -> string = String.format("€ %.2f", prefs.xrbToEur)
-            Main.POUND -> string = String.format("£ %.2f", prefs.xrbToGbp)
+        val string = when (prefs.singleWidgetCurrency) {
+            Main.BITCOIN -> String.format(" %.7f", prefs.xrbToBtc)
+            Main.EURO -> String.format("€ %.2f", prefs.xrbToEur)
+            Main.POUND -> String.format("£ %.2f", prefs.xrbToGbp)
+            else -> String.format("$ %.2f", prefs.xrbToUsd)
         }
         remoteViews.setTextViewText(R.id.price, string)
         if (appWidgetIds != null) {

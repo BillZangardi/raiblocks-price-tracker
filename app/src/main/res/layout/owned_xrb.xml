@@ -22,7 +22,6 @@
     <TextView
         android:id="@+id/gbp_value"
         style="@style/center_textview_style"
-        android:paddingBottom="16dp"
         android:text="@string/gbp_value" />
 
 </LinearLayout>
