@@ -3,7 +3,7 @@
     android:initialLayout="@layout/price_widget"
     android:minHeight="48dp"
     android:minWidth="48dp"
-    android:previewImage="@drawable/owned_widget"
+    android:previewImage="@drawable/price_widget"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen|keyguard" />
