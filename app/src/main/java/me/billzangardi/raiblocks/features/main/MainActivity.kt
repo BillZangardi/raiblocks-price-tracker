@@ -26,6 +26,7 @@ import me.billzangardi.raiblocks.features.settings.SettingsActivity
 import me.billzangardi.raiblocks.prefs.Main
 import me.billzangardi.raiblocks.prefs.MainPrefs
 import me.billzangardi.raiblocks.providers.OwnedXrbWidgetProvider
+import me.billzangardi.raiblocks.providers.PriceWidgetProvider
 import me.billzangardi.raiblocks.providers.TickerWidgetProvider
 import me.billzangardi.raiblocks.util.ViewUtil
 import me.billzangardi.raiblocks.util.ViewUtil.getConversion
@@ -311,6 +312,7 @@ class MainActivity : BaseActivity(), MainView {
     private fun updateWidgets() {
         updateTickerWidget()
         updateOwnedWidget()
+        updatePriceWidget()
     }
 
     private fun updateOwnedWidget() {
@@ -326,8 +328,18 @@ class MainActivity : BaseActivity(), MainView {
     private fun updateTickerWidget() {
         val intent = Intent(this, TickerWidgetProvider::class.java)
         intent.action = DATA_UPDATED
-        val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, TickerWidgetProvider::class.java!!))
+        val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, TickerWidgetProvider::class.java))
         val myWidget = TickerWidgetProvider()
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        sendBroadcast(intent)
+    }
+
+    private fun updatePriceWidget() {
+        val intent = Intent(this, PriceWidgetProvider::class.java)
+        intent.action = DATA_UPDATED
+        val ids = AppWidgetManager.getInstance(this).getAppWidgetIds(ComponentName(this, PriceWidgetProvider::class.java))
+        val myWidget = PriceWidgetProvider()
         myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids)
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
         sendBroadcast(intent)
