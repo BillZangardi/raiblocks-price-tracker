@@ -5,14 +5,10 @@
     <string name="usd_value">USD: $ %.2f</string>
     <string name="eur_value">EUR: € %.2f</string>
     <string name="gbp_value">GBP: £ %.2f</string>
-    <string name="conversion_rate_xrb_btc">1 RaiBlock = %.7f Bitcoin</string>
-    <string name="conversion_rate_xrb_usd">1 RaiBlock = $ %.2f USD</string>
-    <string name="conversion_rate_xrb_eur">1 RaiBlock = € %.2f EUR</string>
-    <string name="conversion_rate_xrb_gbp">1 RaiBlock = £ %.2f GBP</string>
     <string name="xrb">XRB</string>
-    <string name="current_conversion">Current Conversions</string>
     <string name="powered_by">Powered By:</string>
     <string name="error">Error Retrieving Data</string>
+    <string name="internet_required">An internet connection is required</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="donation_address">xrb_3rc735cjobnmz6f74o6x8oc5ceujchxythjcp3jqedqe33fqzh83i699q43b</string>
@@ -22,7 +18,6 @@
     <string name="coindesk_logo">CoinDesk Logo</string>
     <string name="bitgrail_logo">BitGrail Logo</string>
     <string name="last">Last</string>
-    <string name="my_xrb">My XRB</string>
     <string name="raiblock_xrb_ticker">Ticker</string>
     <string name="raiblock_xrb_owned">Owned</string>
     <string name="raiblock_price">Price</string>

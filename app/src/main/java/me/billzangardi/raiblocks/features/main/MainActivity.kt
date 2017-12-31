@@ -28,6 +28,7 @@ import me.billzangardi.raiblocks.prefs.MainPrefs
 import me.billzangardi.raiblocks.providers.OwnedXrbWidgetProvider
 import me.billzangardi.raiblocks.providers.PriceWidgetProvider
 import me.billzangardi.raiblocks.providers.TickerWidgetProvider
+import me.billzangardi.raiblocks.util.NetworkUtil
 import me.billzangardi.raiblocks.util.ViewUtil
 import me.billzangardi.raiblocks.util.ViewUtil.getConversion
 import javax.inject.Inject
@@ -139,7 +140,12 @@ class MainActivity : BaseActivity(), MainView {
     override fun onResume() {
         super.onResume()
         mMainPresenter.attachView(this)
-        setupRefresh()
+        if(NetworkUtil.isNetworkConnected(this@MainActivity)) {
+            setupRefresh()
+        } else {
+            Toast.makeText(this, R.string.internet_required, Toast.LENGTH_LONG).show()
+            updateData()
+        }
         currencyPreferences()
     }
 
