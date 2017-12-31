@@ -2,8 +2,12 @@ package me.billzangardi.raiblocks.prefs;
 
 
 import org.jraf.android.prefs.DefaultFloat;
+import org.jraf.android.prefs.DefaultString;
+import org.jraf.android.prefs.DefaultStringSet;
 import org.jraf.android.prefs.Name;
 import org.jraf.android.prefs.Prefs;
+
+import java.util.Set;
 
 /**
  * Created by zangardiw on 12/22/17.
@@ -25,6 +29,12 @@ public class Main {
     public static final String XRB_TO_EUR_HIGH = "XRB_TO_EUR_HIGH";
     public static final String XRB_TO_GBP_HIGH = "XRB_TO_GBP_HIGH";
     public static final String AMOUNT_OWNED = "AMOUNT_OWNED";
+    public static final String DISPLAY_CURRENCIES = "DISPLAY_CURRENCIES";
+    public static final String SINGLE_WIDGET_CURRENCY = "SINGLE_WIDGET_CURRENCY";
+    public static final String BITCOIN = "BitCoin";
+    public static final String USD = "USD";
+    public static final String EURO = "Euro";
+    public static final String POUND = "Pound";
 
     @Name(LAST_UPDATED)
     String lastUpdated;
@@ -80,4 +90,12 @@ public class Main {
     @Name(AMOUNT_OWNED)
     @DefaultFloat(0.0000000f)
     Float amountOwned;
+
+    @Name(DISPLAY_CURRENCIES)
+    @DefaultStringSet({BITCOIN, USD, EURO, POUND})
+    Set<String> displayCurrencys;
+
+    @Name(SINGLE_WIDGET_CURRENCY)
+    @DefaultString(USD)
+    String singleWidgetCurrency;
 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.view.inputmethod.InputMethodManager
+import java.lang.Float.parseFloat
 
 object ViewUtil {
 
@@ -24,6 +25,16 @@ object ViewUtil {
 
     fun getConversion(bitcoinValue: Float, xrbValueInBtc: Float): Float {
         return bitcoinValue * xrbValueInBtc
+    }
+
+    fun isNumeric(string: String): Boolean {
+        var numeric = true
+        try {
+            val num = parseFloat(string)
+        } catch (e: NumberFormatException) {
+            numeric = false
+        }
+        return numeric
     }
 
 }
