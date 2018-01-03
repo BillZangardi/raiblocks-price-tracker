@@ -12,10 +12,10 @@
 
     <EditTextPreference
         android:key="WIDGET_BACKGROUND_HEX"
-        android:title="Widget Background Color (As Hex)" />
+        android:title="Widget Background Color as Hex (ex: #FFFFFF)" />
 
     <EditTextPreference
         android:key="WIDGET_FONT_HEX"
-        android:title="Widget Font Color (As Hex)" />
+        android:title="Widget Font Color as Hex (ex: #FFFFFF)" />
 
 </PreferenceScreen>
