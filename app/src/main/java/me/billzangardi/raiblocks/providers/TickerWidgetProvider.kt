@@ -15,11 +15,11 @@ import me.billzangardi.raiblocks.util.ViewUtil
  * Created by zangardiw on 12/24/17.
  */
 class TickerWidgetProvider : BaseWidgetProvider() {
-    override fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean, backgroundHex: String?, fontHex: String?) {
+    override fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean) {
         val prefs = MainPrefs.get(context)
         val remoteViews = RemoteViews(context!!.packageName, R.layout.ticker_widget)
-        if (!TextUtils.isEmpty(backgroundHex) && ViewUtil.isColorHex(backgroundHex!!)) {
-            remoteViews.setInt(R.id.layout, "setBackgroundColor", Color.parseColor(backgroundHex))
+        if (!TextUtils.isEmpty(prefs.widgetBackgroundHex) && ViewUtil.isColorHex(prefs.widgetBackgroundHex!!)) {
+            remoteViews.setInt(R.id.layout, "setBackgroundColor", Color.parseColor(prefs.widgetBackgroundHex))
         }
         remoteViews.setTextViewText(R.id.bitcoin_value_high, String.format(context.getString(R.string.bitcoin_value), prefs.xrbToBtcHigh))
         remoteViews.setTextViewText(R.id.usd_value_high, String.format(context.getString(R.string.usd_value), prefs.xrbToUsdHigh))
@@ -33,22 +33,22 @@ class TickerWidgetProvider : BaseWidgetProvider() {
         remoteViews.setTextViewText(R.id.usd_value_low, String.format(context.getString(R.string.usd_value), prefs.xrbToUsdLow))
         remoteViews.setTextViewText(R.id.eur_value_low, String.format(context.getString(R.string.eur_value), prefs.xrbToEurLow))
         remoteViews.setTextViewText(R.id.gbp_value_low, String.format(context.getString(R.string.gbp_value), prefs.xrbToGbpLow))
-        if (!TextUtils.isEmpty(fontHex) && ViewUtil.isColorHex(fontHex!!)) {
-            remoteViews.setTextColor(R.id.high, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.last, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.low, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.bitcoin_value_high, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.usd_value_high, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.eur_value_high, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.gbp_value_high, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.bitcoin_value_last, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.usd_value_last, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.eur_value_last, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.gbp_value_last, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.bitcoin_value_low, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.usd_value_low, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.eur_value_low, Color.parseColor(fontHex))
-            remoteViews.setTextColor(R.id.gbp_value_low, Color.parseColor(fontHex))
+        if (!TextUtils.isEmpty(prefs.widgetFontHex) && ViewUtil.isColorHex(prefs.widgetFontHex!!)) {
+            remoteViews.setTextColor(R.id.high, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.last, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.low, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.bitcoin_value_high, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.usd_value_high, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.eur_value_high, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.gbp_value_high, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.bitcoin_value_last, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.usd_value_last, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.eur_value_last, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.gbp_value_last, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.bitcoin_value_low, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.usd_value_low, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.eur_value_low, Color.parseColor(prefs.widgetFontHex))
+            remoteViews.setTextColor(R.id.gbp_value_low, Color.parseColor(prefs.widgetFontHex))
         }
         remoteViews.setViewVisibility(R.id.bitcoin_value_high, if (displayBtc) View.VISIBLE else View.GONE)
         remoteViews.setViewVisibility(R.id.bitcoin_value_last, if (displayBtc) View.VISIBLE else View.GONE)

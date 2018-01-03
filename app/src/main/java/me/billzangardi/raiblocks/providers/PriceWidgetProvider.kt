@@ -8,7 +8,7 @@ import me.billzangardi.raiblocks.prefs.Main
 import me.billzangardi.raiblocks.prefs.MainPrefs
 
 class PriceWidgetProvider : BaseWidgetProvider() {
-    override fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean, backgroundHex: String?, fontHex: String?) {
+    override fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean) {
         val prefs = MainPrefs.get(context)
         val remoteViews = RemoteViews(context!!.packageName,
                 R.layout.price_widget)
@@ -18,13 +18,7 @@ class PriceWidgetProvider : BaseWidgetProvider() {
             Main.POUND -> String.format("£ %.2f", prefs.xrbToGbp)
             else -> String.format("$ %.2f", prefs.xrbToUsd)
         }
-//        if(!TextUtils.isEmpty(backgroundHex) && ViewUtil.isColorHex(backgroundHex!!)) {
-//            remoteViews.setInt(R.id.price, "setBackgroundColor", Color.parseColor(backgroundHex))
-//        }
         remoteViews.setTextViewText(R.id.price, string)
-//        if(!TextUtils.isEmpty(fontHex) && ViewUtil.isColorHex(fontHex!!)) {
-//            remoteViews.setTextColor(R.id.price, Color.parseColor(fontHex))
-//        }
         if (appWidgetIds != null) {
             val count = appWidgetIds.size
             (0 until count)
