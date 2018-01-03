@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.view.inputmethod.InputMethodManager
 import java.lang.Float.parseFloat
+import java.util.regex.Pattern
 
 object ViewUtil {
 
@@ -35,6 +36,14 @@ object ViewUtil {
             numeric = false
         }
         return numeric
+    }
+
+    fun isColorHex(string: String): Boolean {
+        return try {
+            Pattern.compile("#([0-9a-f]{6}|[0-9a-f]{8})").matcher(string).matches()
+        } catch (e: NumberFormatException) {
+            false
+        }
     }
 
 }

@@ -31,6 +31,8 @@ public class Main {
     public static final String AMOUNT_OWNED = "AMOUNT_OWNED";
     public static final String DISPLAY_CURRENCIES = "DISPLAY_CURRENCIES";
     public static final String SINGLE_WIDGET_CURRENCY = "SINGLE_WIDGET_CURRENCY";
+    public static final String WIDGET_BACKGROUND_HEX = "WIDGET_BACKGROUND_HEX";
+    public static final String WIDGET_FONT_HEX = "WIDGET_FONT_HEX";
     public static final String BITCOIN = "BitCoin";
     public static final String USD = "USD";
     public static final String EURO = "Euro";
@@ -98,4 +100,12 @@ public class Main {
     @Name(SINGLE_WIDGET_CURRENCY)
     @DefaultString(USD)
     String singleWidgetCurrency;
+
+    @Name(WIDGET_BACKGROUND_HEX)
+    @DefaultString("#55000000")
+    String widgetBackgroundHex;
+
+    @Name(WIDGET_FONT_HEX)
+    @DefaultString("#000000")
+    String widgetFontHex;
 }
