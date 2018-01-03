@@ -40,7 +40,7 @@ object ViewUtil {
 
     fun isColorHex(string: String): Boolean {
         return try {
-            Pattern.compile("#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})").matcher(string).matches()
+            Pattern.compile("#([0-9a-f]{6}|[0-9a-f]{8})").matcher(string).matches()
         } catch (e: NumberFormatException) {
             false
         }

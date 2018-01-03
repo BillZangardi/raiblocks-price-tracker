@@ -102,8 +102,10 @@ public class Main {
     String singleWidgetCurrency;
 
     @Name(WIDGET_BACKGROUND_HEX)
+    @DefaultString("#55000000")
     String widgetBackgroundHex;
 
     @Name(WIDGET_FONT_HEX)
+    @DefaultString("#000000")
     String widgetFontHex;
 }
