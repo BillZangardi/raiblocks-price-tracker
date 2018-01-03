@@ -14,8 +14,7 @@ ext {
             prefsVersion    : '1.2.2',
             room            : '1.0.0-alpha5',
             dbDebug         : '1.0.1',
-            leakCanary      : '1.5.3',
-            colorPicker     : '0.0.13'
+            leakCanary      : '1.5.3'
     ]
 
     mockito = [mockito: "org.mockito:mockito-core:2.6.8"]
@@ -30,8 +29,7 @@ ext {
             vectorDrawables  : "com.android.support:support-vector-drawable:$versions.support",
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
             gridLayout       : "com.android.support:gridlayout-v7:$versions.support",
-            materialProgress : "com.pnikosis:materialish-progress:$versions.materialProgress",
-            colorPicker      : "com.github.QuadFlask:colorpicker:$versions.colorPicker"
+            materialProgress : "com.pnikosis:materialish-progress:$versions.materialProgress"
     ]
 
     rxJava = [

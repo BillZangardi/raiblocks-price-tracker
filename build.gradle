@@ -19,7 +19,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
     }
 
     ext {
@@ -29,7 +28,7 @@ allprojects {
         versionMajor = 1
         versionMinor = 1
         versionPatch = 2
-        version_code = 7
+        version_code = 8
     }
 }
 
