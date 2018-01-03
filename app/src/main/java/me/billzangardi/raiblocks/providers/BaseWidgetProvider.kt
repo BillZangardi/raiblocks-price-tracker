@@ -74,7 +74,7 @@ abstract class BaseWidgetProvider : AppWidgetProvider(), MainView {
                 Main.POUND -> displayPound = true
             }
         }
-        updateViews(context, appWidgetManager, appWidgetIds, displayBtc, displayUsd, displayEuro, displayPound)
+        updateViews(context, appWidgetManager, appWidgetIds, displayBtc, displayUsd, displayEuro, displayPound, MainPrefs.get(context).widgetBackgroundHex, MainPrefs.get(context).widgetFontHex)
     }
 
     override fun storeData(data: Data) {
@@ -93,6 +93,6 @@ abstract class BaseWidgetProvider : AppWidgetProvider(), MainView {
         prefs.xrbToGbpLow = ViewUtil.getConversion(data.btcToGbp, data.xrbToBtcLow)
     }
 
-    abstract fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean)
+    abstract fun updateViews(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?, displayBtc: Boolean, displayUsd: Boolean, displayEuro: Boolean, displayPound: Boolean, backgroundHex: String?, fontHex: String?)
 
 }

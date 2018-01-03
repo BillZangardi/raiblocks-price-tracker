@@ -10,4 +10,12 @@
         android:key="SINGLE_WIDGET_CURRENCY"
         android:title="1x1 Widget Currency" />
 
+    <EditTextPreference
+        android:key="WIDGET_BACKGROUND_HEX"
+        android:title="Widget Background Color (As Hex)" />
+
+    <EditTextPreference
+        android:key="WIDGET_FONT_HEX"
+        android:title="Widget Font Color (As Hex)" />
+
 </PreferenceScreen>
