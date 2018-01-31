@@ -194,18 +194,19 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun addDrawerItems() {
-        val osArray = arrayOf("Wallet", "Website", "Exchange - BitGrail", "Reddit", "Discord", "Twitter", "Donations")
+        val osArray = arrayOf("Wallet", "Website", "Exchange", "Reddit", "Discord", "Medium", "Twitter", "Donations")
         mAdapter = ArrayAdapter(this, R.layout.nav_menu_item, osArray)
         mDrawerList.adapter = mAdapter
-        mDrawerList.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        mDrawerList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             var url: String = ""
             when (position) {
-                0 -> url = "https://raiwallet.com/"
-                1 -> url = "https://raiblocks.net/"
+                0 -> url = "https://nanowallet.io/"
+                1 -> url = "http://nano.org/en"
                 2 -> url = "https://bitgrail.com/"
-                3 -> url = "https://www.reddit.com/r/RaiBlocks"
-                4 -> url = "https://discordapp.com/invite/JphbBas"
-                5 -> url = "https://twitter.com/raiblocks"
+                3 -> url = "https://www.reddit.com/r/nanocurrency"
+                4 -> url = "http://chat.nano.co/"
+                5 -> url = "https://medium.com/@nanocurrency"
+                6 -> url = "https://twitter.com/nanocurrency"
             }
             if (!TextUtils.isEmpty(url)) {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))

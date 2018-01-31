@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">RaiBlocks</string>
+    <string name="app_name">Nano</string>
     <string name="i_own_label">I own:</string>
     <string name="bitcoin_value">Bitcoin: %.7f</string>
     <string name="usd_value">USD: $ %.2f</string>
     <string name="eur_value">EUR: € %.2f</string>
     <string name="gbp_value">GBP: £ %.2f</string>
-    <string name="xrb">XRB</string>
+    <string name="nano">NANO</string>
     <string name="powered_by">Powered By:</string>
     <string name="error">Error Retrieving Data</string>
     <string name="internet_required">An internet connection is required</string>

@@ -4,6 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".features.main.MainActivity">
 
 
@@ -34,19 +35,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/i_own_label" />
+                    android:text="@string/i_own_label"
+                    android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/edit_xrb_amount"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/xrb" />
+                    android:text="@string/nano"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
