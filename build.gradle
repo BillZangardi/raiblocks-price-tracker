@@ -28,7 +28,7 @@ allprojects {
         versionMajor = 2
         versionMinor = 0
         versionPatch = 0
-        version_code = 10
+        version_code = 11
     }
 }
 
