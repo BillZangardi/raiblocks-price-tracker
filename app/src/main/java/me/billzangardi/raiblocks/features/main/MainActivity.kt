@@ -194,7 +194,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun addDrawerItems() {
-        val osArray = arrayOf("Wallet", "Website", "Exchange", "Reddit", "Discord", "Medium", "Twitter", "Donations")
+        val osArray = arrayOf("Wallet", "Website", "Exchange - Nanex", "Reddit", "Discord", "Medium", "Twitter", "Donations")
         mAdapter = ArrayAdapter(this, R.layout.nav_menu_item, osArray)
         mDrawerList.adapter = mAdapter
         mDrawerList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
@@ -202,7 +202,7 @@ class MainActivity : BaseActivity(), MainView {
             when (position) {
                 0 -> url = "https://nanowallet.io/"
                 1 -> url = "http://nano.org/en"
-                2 -> url = "https://bitgrail.com/"
+                2 -> url = "http://nanex.co/"
                 3 -> url = "https://www.reddit.com/r/nanocurrency"
                 4 -> url = "http://chat.nano.co/"
                 5 -> url = "https://medium.com/@nanocurrency"
@@ -223,7 +223,7 @@ class MainActivity : BaseActivity(), MainView {
         alert.setView(imageview)
         alert.setMessage(getString(R.string.donation_address))
         alert.setNegativeButton(getString(R.string.generic_done)
-        ) { dialog, id -> dialog.dismiss() }
+        ) { dialog, _ -> dialog.dismiss() }
         alert.show()
     }
 
@@ -365,4 +365,5 @@ class MainActivity : BaseActivity(), MainView {
     fun onBitgrailClick() {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://bitgrail.com/")))
     }
+
 }
