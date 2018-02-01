@@ -22,7 +22,7 @@ class OwnedXrbWidgetProvider : BaseWidgetProvider() {
         if(!TextUtils.isEmpty(prefs.widgetBackgroundHex) && ViewUtil.isColorHex(prefs.widgetBackgroundHex!!)) {
             remoteViews.setInt(R.id.layout, "setBackgroundColor", Color.parseColor(prefs.widgetBackgroundHex))
         }
-        remoteViews.setTextViewText(R.id.owned, prefs.amountOwned.toString() + " " + context.getString(R.string.xrb))
+        remoteViews.setTextViewText(R.id.owned, prefs.amountOwned.toString() + " " + context.getString(R.string.nano))
         remoteViews.setTextViewText(R.id.bitcoin_value, String.format(context.getString(R.string.bitcoin_value), prefs.xrbToBtc * prefs.amountOwned))
         remoteViews.setTextViewText(R.id.usd_value, String.format(context.getString(R.string.usd_value), prefs.xrbToUsd * prefs.amountOwned))
         remoteViews.setTextViewText(R.id.eur_value, String.format(context.getString(R.string.eur_value), prefs.xrbToEur * prefs.amountOwned))
