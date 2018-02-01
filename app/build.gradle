@@ -29,7 +29,7 @@ android {
         def STRING = "String"
         def BITGRAIL_API = "BITGRAIL_API"
         def COINDESK_API = "COINDESK_API"
-        def BITGRAIL_URL = "\"https://bitgrail.com/api/v1/\""
+        def BITGRAIL_URL = "\"https://api.bitgrail.com/v1/\""
         def COINDESK_URL = "\"https://api.coindesk.com/v1/bpi/\""
         debug {
             debuggable true
